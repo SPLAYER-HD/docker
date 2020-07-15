@@ -1,0 +1,4 @@
+lib/
+installers/
+*.bin
+*.jar

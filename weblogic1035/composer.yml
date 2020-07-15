@@ -1,0 +1,28 @@
+version: '3.1'
+
+volumes:
+    accion_reportes: {}
+    accion_weblogic_home: {}   
+    accion_aplicaciones: {}    
+    accion_adjuntos: {}
+    
+services:
+
+  weblogic_fitideas:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    image: weblogic/fitideas:v1
+    stdin_open: true
+    tty: true
+    ports:
+        - "7001:7001"
+        - "8088:8080"
+        - "9000:9000"
+    volumes:
+        - accion_reportes:/reportes
+        - accion_weblogic_home:/home/user/weblogic
+        - accion_aplicaciones:/aplicaciones
+        - accion_adjuntos:/adjuntos
+    env_file:
+        - ./.envs/.weblogic
